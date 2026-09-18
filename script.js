@@ -44,8 +44,8 @@ const QUESTIONS = {
     type: "mcq",
     options: ["En soirée", "Au lycée", "Sur une appli", "Au sport"],
     answer: "Au lycée",
-    successMsg: "Facile. On passe aux choses sérieuses.",
-    nextLabel: "Les choses sérieuses",
+    successMsg: "Bien, mais c'était simple !",
+    nextLabel: "On continue",
     wrongMsgs: [
       "Non. Tu confonds avec quelqu’un d’autre ?",
       "Toujours pas. Concentre-toi.",
@@ -64,7 +64,7 @@ const QUESTIONS = {
         v.indexOf("mur") >= 0 ||
         v.indexOf("tram") >= 0),
     successMsg:
-      "Le muret près du tram. Évidemment.\n…Bon. Maintenant passons auc choses sérieuses.",
+      "Le muret près du tram. Évidemment.\n…Bon. Maintenant passons aux choses sérieuses.",
     wrongMsgs: [
       "Non. Cherche un endroit inconfortable où on restait quand même des heures.",
       "Toujours pas. Il y avait du béton et des rails.",
