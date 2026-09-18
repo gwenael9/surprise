@@ -465,7 +465,7 @@ function renderS6() {
       <div class="lili-word">ROME</div>
       <svg class="lili-reveal-divider" viewBox="0 0 140 16" fill="none" stroke="#D99A4E" stroke-width="1.2" stroke-linecap="round"><path d="M6 8q16-9 30 0t30 0"></path><path d="M74 8q16-9 30 0t30 0"></path><path d="M70 4.6c1.6-2.4 5-1.4 5 1.2 0 2.2-3 4-5 5.6-2-1.6-5-3.4-5-5.6 0-2.6 3.4-3.6 5-1.2z" fill="#C25B3A" stroke="none"></path></svg>
       <div class="lili-date">du 10 au 14 mars 2027</div>
-      <p class="lili-final">Joyeux anniversaire Lili.</p>
+      <p class="lili-final">Joyeux anniversaire Lili d'amouuuuur. ❤️</p>
     </div>`;
 }
 
