@@ -199,27 +199,31 @@ function runScreen5() {
   CITIES.forEach((c) => (lit[c.n] = true));
   state.panel = true;
   state.lit = lit;
-  after(1700, () => {
-    state.lit.Venise = false;
-    renderMap();
-  });
-  after(3200, () => {
-    state.lit.Naples = false;
-    renderMap();
-  });
-  after(4700, () => {
-    state.lit.Milan = false;
-    renderMap();
-  });
+  after(1700, () => setCityLit("Venise", false));
+  after(3200, () => setCityLit("Naples", false));
+  after(4700, () => setCityLit("Milan", false));
+}
+
+function setCityLit(name, on) {
+  state.lit[name] = on;
+  const dot = document.getElementById(`dot-${name}`);
+  if (dot) dot.setAttribute("opacity", on ? "1" : "0");
+  const chip = document.getElementById(`chip-${name}`);
+  if (chip)
+    chip.style.cssText = on
+      ? "color:#F2E4D0;opacity:1;border-color:rgba(217,154,78,.45)"
+      : "color:rgba(242,228,208,.32);opacity:.5;text-decoration:line-through";
+  const bullet = document.getElementById(`bullet-${name}`);
+  if (bullet)
+    bullet.style.cssText = on
+      ? "background:#D99A4E;box-shadow:0 0 0 4px rgba(217,154,78,.18)"
+      : "background:rgba(242,228,208,.22);box-shadow:none";
 }
 
 function revealPanel() {
   state.panel = true;
   CITIES.forEach((c, i) =>
-    after(260 + i * 180, () => {
-      state.lit[c.n] = true;
-      renderMap();
-    }),
+    after(260 + i * 180, () => setCityLit(c.n, true)),
   );
 }
 
@@ -345,7 +349,7 @@ function renderMap() {
   const distance = DIST[sc] || DIST[3];
   const cityDots = CITIES.map(
     (c) =>
-      `<circle class="lili-city-dot" cx="${c.x}" cy="${c.y}" r="3.4" fill="#F2E4D0" stroke="#C25B3A" stroke-width="1.2" opacity="${state.panel && state.lit[c.n] ? 1 : 0}"></circle>`,
+      `<circle id="dot-${c.n}" class="lili-city-dot" cx="${c.x}" cy="${c.y}" r="3.4" fill="#F2E4D0" stroke="#C25B3A" stroke-width="1.2" opacity="${state.panel && state.lit[c.n] ? 1 : 0}"></circle>`,
   ).join("");
   const panelHtml = !state.panel
     ? ""
@@ -361,14 +365,14 @@ function renderMap() {
           const bulletStyle = on
             ? "background:#D99A4E;box-shadow:0 0 0 4px rgba(217,154,78,.18)"
             : "background:rgba(242,228,208,.22);box-shadow:none";
-          return `<div class="lili-city-chip" style="${rowStyle}"><span class="lili-city-bullet" style="${bulletStyle}"></span><span>${c.n}</span></div>`;
+          return `<div id="chip-${c.n}" class="lili-city-chip" style="${rowStyle}"><span id="bullet-${c.n}" class="lili-city-bullet" style="${bulletStyle}"></span><span>${c.n}</span></div>`;
         }).join("")}
       </div>
     </div>`;
   mapWrapEl.innerHTML = `
     <div class="lili-map">
       <div class="lili-map-card">
-        <svg class="lili-map-svg" viewBox="0 0 400 320" aria-hidden="true">
+        <svg class="lili-map-svg" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           ${MAP_STATIC_SVG}
           <g class="lili-halo" style="${haloStyle}"><circle cx="0" cy="0" r="100" fill="url(#liliHalo)"></circle></g>
           ${cityDots}
@@ -461,6 +465,7 @@ function renderS6() {
       ${lm("lili-lm-colisee-2", "lm-colisee")}
     </div>
     <div class="lili-reveal">
+      <svg class="lili-plane-icon" viewBox="0 0 24 24" fill="none" stroke="#D99A4E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg>
       <div class="lili-reveal-kicker">Destination confirmée</div>
       <div class="lili-word">ROME</div>
       <svg class="lili-reveal-divider" viewBox="0 0 140 16" fill="none" stroke="#D99A4E" stroke-width="1.2" stroke-linecap="round"><path d="M6 8q16-9 30 0t30 0"></path><path d="M74 8q16-9 30 0t30 0"></path><path d="M70 4.6c1.6-2.4 5-1.4 5 1.2 0 2.2-3 4-5 5.6-2-1.6-5-3.4-5-5.6 0-2.6 3.4-3.6 5-1.2z" fill="#C25B3A" stroke="none"></path></svg>
@@ -508,5 +513,25 @@ function render() {
   renderMap();
   renderStage();
 }
+
+function randomizeGlow() {
+  const top = document.querySelector(".lili-glow-top");
+  const bottom = document.querySelector(".lili-glow-bottom");
+  if (top) {
+    const tx = (Math.random() * 44 - 22).toFixed(0);
+    const ty = (Math.random() * 32 - 16).toFixed(0);
+    const sc = (1 + Math.random() * 0.35).toFixed(2);
+    const op = (0.5 + Math.random() * 0.35).toFixed(2);
+    top.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`;
+    top.style.opacity = op;
+  }
+  if (bottom) {
+    const tx = (Math.random() * 60 - 30).toFixed(0);
+    const ty = (Math.random() * 24 - 12).toFixed(0);
+    bottom.style.transform = `translate(${tx}px,${ty}px)`;
+  }
+}
+randomizeGlow();
+setInterval(randomizeGlow, 7000);
 
 render();

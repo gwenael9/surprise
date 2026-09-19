@@ -29,8 +29,8 @@ input{font-family:inherit}
 
 /* shell */
 .lili-shell{height:100svh;min-height:100svh;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 18px 20px;overflow:hidden;background:radial-gradient(135% 95% at 50% -8%,#43201c 0%,#261821 42%,#150e14 100%);position:relative}
-.lili-glow-bottom{position:absolute;inset:auto -25% -35% -25%;height:65%;background:radial-gradient(60% 100% at 50% 100%,rgba(194,91,58,.30),transparent 70%);pointer-events:none}
-.lili-glow-top{position:absolute;top:-18%;right:-22%;width:70%;padding-bottom:70%;border-radius:50%;background:radial-gradient(circle,rgba(217,154,78,.20),transparent 65%);pointer-events:none;animation:lili-breathe 11s ease-in-out infinite}
+.lili-glow-bottom{position:absolute;inset:auto -25% -35% -25%;height:65%;background:radial-gradient(60% 100% at 50% 100%,rgba(194,91,58,.30),transparent 70%);pointer-events:none;transition:transform 7s ease-in-out}
+.lili-glow-top{position:absolute;top:-18%;right:-22%;width:70%;padding-bottom:70%;border-radius:50%;background:radial-gradient(circle,rgba(217,154,78,.20),transparent 65%);pointer-events:none;transition:transform 7s ease-in-out,opacity 7s ease-in-out}
 .lili-vignette{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 45%,transparent 45%,rgba(16,10,12,.6) 100%);pointer-events:none}
 .lili-col{position:relative;width:100%;max-width:470px;max-height:100%;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:clamp(9px,2.2vh,20px)}
 
@@ -103,6 +103,7 @@ input{font-family:inherit}
 .lili-lm-colisee-2{left:23%;top:82%;width:min(28vw,128px);transform:rotate(4deg);opacity:.11}
 
 .lili-reveal{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:10px 0}
+.lili-plane-icon{width:34px;height:34px;animation:lili-up .6s cubic-bezier(.22,1,.36,1) both}
 .lili-reveal-kicker{font:700 12px/1 var(--font-body);letter-spacing:.26em;text-transform:uppercase;color:var(--gold);animation:lili-up .6s .1s cubic-bezier(.22,1,.36,1) both}
 .lili-word{font-family:var(--font-display);font-weight:700;font-size:clamp(64px,23vw,132px);line-height:.92;letter-spacing:.03em;color:var(--cream);text-shadow:0 14px 60px rgba(217,154,78,.45),0 2px 0 rgba(194,91,58,.35);animation:lili-up .9s .25s cubic-bezier(.22,1,.36,1) both}
 .lili-reveal-divider{width:140px;height:16px;animation:lili-up .6s .6s both}
