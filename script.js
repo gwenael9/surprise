@@ -222,9 +222,7 @@ function setCityLit(name, on) {
 
 function revealPanel() {
   state.panel = true;
-  CITIES.forEach((c, i) =>
-    after(260 + i * 180, () => setCityLit(c.n, true)),
-  );
+  CITIES.forEach((c, i) => after(260 + i * 180, () => setCityLit(c.n, true)));
 }
 
 function fire() {
@@ -256,11 +254,14 @@ function submit() {
   const raw = inputEl ? inputEl.value : "";
   const v = norm(raw);
   if (q.check(v)) {
+    if (state.screen === 5) {
+      goto(6);
+      return;
+    }
     state.ok = true;
     state.msg = q.successMsg;
     state.txt = raw;
     render();
-    if (state.screen === 5) after(700, () => goto(6));
   } else {
     state.wrong++;
     state.msg = q.wrongMsgs[state.wrong % q.wrongMsgs.length];
@@ -425,12 +426,14 @@ function renderQuestion(sc) {
       html += `<div class="lili-options">${renderOptions(q)}</div>`;
     else
       html += `<div class="lili-chip"><span class="lili-chip-mark">✓</span>${escapeHtml(q.answer)}</div>`;
-  } else {
+  } else if (!state.ok) {
     html += `
       <div class="lili-answer-row">
         <input id="answerInput" class="lili-input" type="text" value="${escapeHtml(state.txt)}" placeholder="${escapeHtml(q.placeholder)}" autocomplete="off" autocapitalize="off" spellcheck="false">
         <button type="button" id="submitBtn" class="lili-btn btn-primary">Valider</button>
       </div>`;
+  } else {
+    html += `<div class="lili-chip"><span class="lili-chip-mark">✓</span>${escapeHtml(state.txt)}</div>`;
   }
 
   if (state.msg)
@@ -452,6 +455,12 @@ const LANDMARK_DEFS = `
 function renderS6() {
   const lm = (cls, id) =>
     `<svg class="lili-lm ${cls}" viewBox="0 0 100 100" fill="none" stroke="#D99A4E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#${id}"></use></svg>`;
+  const barcode = Array.from({ length: 22 })
+    .map(
+      (_, i) =>
+        `<span style="width:${(i % 3) + 1}px;height:${(i % 4) * 4 + 10}px"></span>`,
+    )
+    .join("");
   return `
     <div class="lili-reveal-decor">
       <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${LANDMARK_DEFS}</defs></svg>
@@ -464,14 +473,34 @@ function renderS6() {
       ${lm("lili-lm-colonne-2", "lm-colonne")}
       ${lm("lili-lm-colisee-2", "lm-colisee")}
     </div>
-    <div class="lili-reveal">
-      <svg class="lili-plane-icon" viewBox="0 0 24 24" fill="none" stroke="#D99A4E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg>
-      <div class="lili-reveal-kicker">Destination confirmée</div>
-      <div class="lili-word">ROME</div>
-      <svg class="lili-reveal-divider" viewBox="0 0 140 16" fill="none" stroke="#D99A4E" stroke-width="1.2" stroke-linecap="round"><path d="M6 8q16-9 30 0t30 0"></path><path d="M74 8q16-9 30 0t30 0"></path><path d="M70 4.6c1.6-2.4 5-1.4 5 1.2 0 2.2-3 4-5 5.6-2-1.6-5-3.4-5-5.6 0-2.6 3.4-3.6 5-1.2z" fill="#C25B3A" stroke="none"></path></svg>
-      <div class="lili-date">du 10 au 14 mars 2027</div>
-      <p class="lili-final">Joyeux anniversaire Lili d'amouuuuur. ❤️</p>
-    </div>`;
+    <div class="lili-pass">
+      <div class="lili-pass-top">
+        <div>
+          <div class="lili-pass-kicker">Carte d'embarquement</div>
+          <div class="lili-pass-brand">Grall Lise · 25 ans</div>
+        </div>
+        <svg class="lili-plane-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg>
+      </div>
+      <div class="lili-pass-route">
+        <span class="lili-pass-city">Paris</span>
+        <span class="lili-pass-dotted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg></span>
+        <span class="lili-pass-city">Rome</span>
+      </div>
+      <div class="lili-pass-word">ROME</div>
+      <div class="lili-pass-perf"></div>
+      <div class="lili-pass-bottom">
+        <div class="lili-pass-field">
+          <span class="lili-pass-label">Dates</span>
+          <span class="lili-pass-value">10 → 14 mars 2027</span>
+        </div>
+        <div class="lili-pass-field">
+          <span class="lili-pass-label">Passagère</span>
+          <span class="lili-pass-value">Lili</span>
+        </div>
+        <div class="lili-pass-barcode">${barcode}</div>
+      </div>
+    </div>
+    <p class="lili-final">Joyeux anniversaire Lili d'amouuuuur. ❤️</p>`;
 }
 
 function bindStage() {

@@ -102,12 +102,26 @@ input{font-family:inherit}
 .lili-lm-colonne-2{left:-2%;top:38%;width:min(22vw,100px);transform:rotate(6deg);opacity:.10}
 .lili-lm-colisee-2{left:23%;top:82%;width:min(28vw,128px);transform:rotate(4deg);opacity:.11}
 
-.lili-reveal{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:10px 0}
-.lili-plane-icon{width:34px;height:34px;animation:lili-up .6s cubic-bezier(.22,1,.36,1) both}
-.lili-reveal-kicker{font:700 12px/1 var(--font-body);letter-spacing:.26em;text-transform:uppercase;color:var(--gold);animation:lili-up .6s .1s cubic-bezier(.22,1,.36,1) both}
-.lili-word{font-family:var(--font-display);font-weight:700;font-size:clamp(64px,23vw,132px);line-height:.92;letter-spacing:.03em;color:var(--cream);text-shadow:0 14px 60px rgba(217,154,78,.45),0 2px 0 rgba(194,91,58,.35);animation:lili-up .9s .25s cubic-bezier(.22,1,.36,1) both}
-.lili-reveal-divider{width:140px;height:16px;animation:lili-up .6s .6s both}
-.lili-date{font-family:var(--font-display);font-weight:500;font-style:italic;font-size:clamp(21px,6.2vw,28px);line-height:1.3;color:var(--gold);animation:lili-up .8s .7s cubic-bezier(.22,1,.36,1) both}
-.lili-final{margin:6px 0 0;font-size:17px;line-height:1.6;color:var(--cream-soft);animation:lili-up .8s .95s cubic-bezier(.22,1,.36,1) both}
+.lili-pass{position:relative;z-index:1;background:linear-gradient(180deg,rgba(242,228,208,.07),rgba(242,228,208,.03));border:1px solid rgba(217,154,78,.28);border-radius:20px;backdrop-filter:blur(6px);animation:lili-up .7s cubic-bezier(.22,1,.36,1) both}
+.lili-pass-top{padding:18px 20px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.lili-pass-kicker{font:700 11px/1 var(--font-body);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.lili-pass-brand{margin-top:6px;font:600 14px/1 var(--font-display);font-style:italic;color:var(--cream-faint)}
+.lili-plane-icon{width:28px;height:28px;flex:none;color:var(--gold)}
+.lili-pass-route{display:flex;align-items:center;gap:12px;padding:2px 20px 10px}
+.lili-pass-city{font-family:var(--font-display);font-weight:600;font-size:clamp(14px,3.8vw,17px);color:var(--cream-faint);text-transform:uppercase;letter-spacing:.04em}
+.lili-pass-dotted{flex:1;position:relative;height:1px;background:repeating-linear-gradient(90deg,rgba(217,154,78,.5) 0 6px,transparent 6px 12px);margin:0 2px}
+.lili-pass-dotted svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:16px;color:var(--gold)}
+.lili-pass-word{padding:0 20px;font-family:var(--font-display);font-weight:700;font-size:clamp(46px,15vw,88px);line-height:.95;letter-spacing:.02em;color:var(--cream);text-shadow:0 14px 60px rgba(217,154,78,.4),0 2px 0 rgba(194,91,58,.3)}
+.lili-pass-perf{position:relative;height:0;margin-top:16px;border-top:2px dashed rgba(217,154,78,.3)}
+.lili-pass-perf::before,.lili-pass-perf::after{content:"";position:absolute;top:-10px;width:20px;height:20px;border-radius:50%;background:#150e14}
+.lili-pass-perf::before{left:-11px}
+.lili-pass-perf::after{right:-11px}
+.lili-pass-bottom{padding:16px 20px 20px;display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}
+.lili-pass-field{display:flex;flex-direction:column;gap:4px}
+.lili-pass-label{font:700 10px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--cream-faint)}
+.lili-pass-value{font-family:var(--font-display);font-weight:500;font-style:italic;font-size:16px;color:var(--gold)}
+.lili-pass-barcode{margin-left:auto;display:flex;gap:2px;align-items:flex-end;height:24px;opacity:.55}
+.lili-pass-barcode span{display:block;width:2px;background:var(--cream)}
+.lili-final{margin:16px 2px 0;font-size:17px;line-height:1.6;color:var(--cream-soft);text-align:center;animation:lili-up .8s .3s cubic-bezier(.22,1,.36,1) both}
 
 .confetti-layer{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:9}
